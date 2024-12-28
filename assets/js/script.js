@@ -100,10 +100,10 @@ function CalcGame(){
                 if(e.target.closest('#numList')){
                     calcBoard.appendChild(e.currentTarget);
                 }else{
-                    if(calcBoard.querySelectorAll('li').length > 1 && calcBoard.querySelectorAll('li')[1].dataset.type === 'opr'){
-                        alert('잘못된 요청입니다.');
-                        return;
-                    }
+                    // if(calcBoard.querySelectorAll('li').length > 1 && calcBoard.querySelectorAll('li')[1].dataset.type === 'opr'){
+                    //     alert('잘못된 요청입니다.');
+                    //     return;
+                    // }
                     
                     numList.appendChild(e.currentTarget);
                 }
@@ -120,13 +120,13 @@ function CalcGame(){
                 const numList = document.getElementById('numList');
                 const calcList = calcBoard.querySelectorAll('li');
                 
-                if(!calcList.length
-                || calcList[calcList.length - 1].dataset.type === 'opr'
-                || !numList.querySelectorAll('li').length
-                ){
-                    alert('잘못된 요청입니다.');
-                    return;
-                }
+                // if(!calcList.length
+                // || calcList[calcList.length - 1].dataset.type === 'opr'
+                // || !numList.querySelectorAll('li').length
+                // ){
+                //     alert('잘못된 요청입니다.');
+                //     return;
+                // }
                 const copy = e.currentTarget.cloneNode(true);
                 copy.addEventListener('click', e => {
                     e.currentTarget.remove();
@@ -141,25 +141,49 @@ function CalcGame(){
             const numList = document.getElementById('numList');
 
             if(numList.querySelectorAll('li').length){
-                alert('잘못된 요청입니다.');
+                alert('모든 숫자를 사용해주세요.');
                 return;
             }
+            if(calcBoard.querySelectorAll('li')[0].dataset.type === 'opr'){
+                alert('맨 앞에 연산자가 올 수 없습니다.');
+                return;
+            }
+
+            let anyOpr = false;
+            for(let i = 0; i < calcBoard.querySelectorAll('li').length; i++){
+                if(calcBoard.querySelectorAll('li')[i].dataset.type === 'opr'){
+                    anyOpr = true;
+                    break;
+                }
+
+            }
+
+            if(!anyOpr){
+                alert('연산자가 빠졌습니다.');
+                return;
+            }
+
 
             let calcBoardStr = '';
             document.querySelectorAll('#calcBoard li').forEach(li => {
                 calcBoardStr += li.dataset.id;
             });
-            
-            const result = new Function('return ' + calcBoardStr)();  // new Function을 사용하여 문자열 계산
-            // console.log(result);  // 결과: -3
+            try{
+                const result = new Function('return ' + calcBoardStr)();  // new Function을 사용하여 문자열 계산
+                // console.log(result);  // 결과: -3
+    
+                const myVal = document.getElementById('myValue');
+    
+                myVal.textContent = result;
+                myVal.setAttribute('class', 'my-value');
+    
+                if(this.obj.finalVal === result) myVal.classList.add('correct');
+                else myVal.classList.add('wrong');
 
-            const myVal = document.getElementById('myValue');
+            }catch(err){
+                alert('식을 확인해주세요.');
 
-            myVal.textContent = result;
-            myVal.setAttribute('class', 'my-value');
-
-            if(this.obj.finalVal === result) myVal.classList.add('correct');
-            else myVal.classList.add('wrong');
+            }
         });
         document.getElementById('init').addEventListener('click', () => {
             if(!confirm('초기화하시겠습니까?')) return;
