@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연산군</title>
+    <link rel="stylesheet" href="./assets/css/normalize.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+<body>
+    <main>
+        <h2 id="finalValue"></h2>
+        <p>
+            아래 주어진 숫자카드와 연산자카드를 조합해서<br>
+            위의 숫자를 만들어주세요.
+            <strong>*모든 숫자를 사용할 것</strong>
+            <strong>*숫자가 10을 넘을 수 있음</strong>
+        </p>
+        
+        <ul id="calcBoard" class="calc-board"></ul>
+        <h2 id="myValue" class="my-value"></h2>
+    </main>
+    <footer>
+        <fieldset>
+            <legend>연산자</legend>
+            <ul id="oprList" class="opr-list">
+                <li data-id="+" data-type="opr">➕</li>
+                <li data-id="-" data-type="opr">➖</li>
+                <li data-id="*" data-type="opr">✖️</li>
+                <li data-id="/" data-type="opr">➗</li>
+            </ul>
+        </fieldset>
+        <fieldset>
+            <legend>숫자</legend>
+            <ul id="numList" class="num-list">
+            </ul>
+        </fieldset>
+        <div class="btns">
+            <button id="init">초기화</button>
+            <button id="submit">제출</button>
+        </div>
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
