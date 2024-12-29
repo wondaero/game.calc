@@ -35,6 +35,8 @@ html, body{
     height: 100%;
     font-family: Pretendard;
     min-width: 280px;
+    background: darkslateblue;
+    color: #fff;
 }
 body{
     display: flex;
@@ -55,17 +57,15 @@ h2{
 }
 p{
     text-align: center;
-    font-size: 14px;
+    font-size: 20px;
+    color: #fff;
 }
 p strong{
-    color: #f00;
-    font-size: 12px;
-    display: block;
-}
-p span{
     color: orange;
-    font-size: 12px;
+    font-size: .6em;
     display: block;
+    line-height: 1.4;
+    margin-top: 5px;
 }
 footer{
     padding: 10px;
@@ -73,6 +73,10 @@ footer{
 fieldset{
     border-radius: 5px;
     margin-top: 10px;
+    border: 1px solid #fff;
+}
+fieldset legend{
+    padding: 0 5px;
 }
 ul{
     list-style: none;
@@ -96,10 +100,12 @@ ul li{
     margin-right: 10px;
     margin-bottom: 10px;
     cursor: pointer;
+    background: #fff;
+    color: #000;
 }
 
 .calc-board{
-    border: 6px double cyan;
+    border: 1px solid yellow;
     border-radius: 5px;
 }
 
@@ -137,4 +143,28 @@ ul li{
 }
 .my-value.wrong{
     color: #f00;
+}
+
+@media (max-width: 420px){
+    p{
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+    }
+    ul li{
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+@media (max-width: 320px){
+    p{
+        font-size: 14px;
+    }
+    ul li{
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
 }
