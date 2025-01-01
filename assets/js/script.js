@@ -14,6 +14,7 @@ function CalcGame(){
         combiNum: '',
         numGroupArr: [],
         finalVal: undefined,
+        recalCnt: 0
     }
 
     this.getNumber = () => {
@@ -64,7 +65,11 @@ function CalcGame(){
         });
 
         if(String(this.obj.finalVal).indexOf('.') > -1){
-            console.warn('재연산!!!')
+            console.warn('재연산!!!');
+            const recalCnt = document.getElementById('recalCnt');
+
+            this.obj.recalCnt++;
+            recalCnt.textContent = this.obj.recalCnt;
             this.randomOprCalc();
         }
     }
@@ -144,10 +149,27 @@ function CalcGame(){
                 alert('모든 숫자를 사용해주세요.');
                 return;
             }
+
+            let oprCnt = 0;
+            let overOpr = false;
+
+            calcBoard.querySelectorAll('li').forEach(li => {
+                if(li.dataset.type === 'opr') oprCnt++;
+                else oprCnt = 0;
+
+                if(oprCnt > 1) overOpr = true;
+            })
+
+            if(overOpr){
+                alert('연산자를 확인해 주세요.');
+                return;
+            }
+
             if(calcBoard.querySelectorAll('li')[0].dataset.type === 'opr'){
                 alert('맨 앞에 연산자가 올 수 없습니다.');
                 return;
             }
+
 
             let anyOpr = false;
             for(let i = 0; i < calcBoard.querySelectorAll('li').length; i++){
@@ -155,7 +177,6 @@ function CalcGame(){
                     anyOpr = true;
                     break;
                 }
-
             }
 
             if(!anyOpr){

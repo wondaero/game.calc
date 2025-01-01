@@ -145,6 +145,13 @@ ul li{
     color: #f00;
 }
 
+.recal-cnt{
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    color: #fff;
+    opacity: .1;
+}
 @media (max-width: 420px){
     p{
         text-align: center;
